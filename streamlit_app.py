@@ -1,26 +1,20 @@
 import streamlit as st
+import pandas as pd
 
-st.title("🎈 Hello World!")
-st.markdown("""
-# 시간 관리 서비스 개발자 소개
+# Load the CSV data
+data_file = 'movies_2024.csv'
+df = pd.read_csv(data_file)
 
-안녕하세요! 저는 **시간 관리 서비스**를 개발하는 개발자입니다. 사용자가 효율적으로 일정을 관리하고 목표를 달성할 수 있도록 돕는 서비스를 만들고 있습니다. 특히, **HTML5 Canvas**를 활용해 직관적이고 시각적인 방식으로 데이터를 표현하여, 사용자 경험을 극대화하고 있습니다.
+# Filter the relevant columns for budget and revenue
+budget_revenue_df = df[['title', 'budget', 'revenue']]
 
-## 서비스 목표
-- **효율적인 일정 관리**: 사용자가 쉽게 일정을 확인하고 관리할 수 있도록 인터페이스 최적화
-- **시각적 데이터 분석**: Canvas 기반의 그래프와 차트를 통해 사용자가 자신의 시간 사용 패턴을 시각적으로 분석 가능
-- **목표 설정 및 추적**: 목표를 설정하고 진행 상황을 시각적으로 확인하여 동기 부여
+# Create Streamlit app
+st.title('Movie Budget vs Revenue')
 
-## 주요 기능 및 기술
+# Show data in a table
+st.write("## Budget and Revenue Table")
+st.dataframe(budget_revenue_df)
 
-| 기능               | 설명                                                                                 |
-| ------------------ | ------------------------------------------------------------------------------------ |
-| 일정 관리          | 달력 및 리스트 뷰를 통해 일정을 추가하고 쉽게 관리할 수 있는 기능 제공                  |
-| 목표 설정 및 추적  | 목표를 설정하고 Canvas 차트를 통해 진행 상황을 시각화                                 |
-| 시간 사용 분석     | HTML5 Canvas를 활용해 시간 사용 패턴을 직관적인 그래프로 표현                          |
-| 실시간 알림        | 중요한 일정에 대해 미리 알림을 제공하여 사용자의 일정 관리를 지원                      |
-
-Canvas를 통해 시각적이고 사용자가 이해하기 쉬운 UI를 구현하여, 보다 나은 시간 관리와 목표 달성을 돕는 데 집중하고 있습니다.
-
-
-""")
+# Add additional information
+st.write("### Insights")
+st.write("This table shows the budget and revenue of each movie, which helps in understanding their financial performance.")
